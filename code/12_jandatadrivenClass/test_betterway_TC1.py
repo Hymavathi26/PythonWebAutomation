@@ -1,9 +1,3 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import time
-import pytest
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 import os
 from dotenv import load_dotenv
@@ -12,8 +6,8 @@ from selenium.webdriver.common.by import By
 import time
 import pytest
 import openpyxl
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from openpyxl import load_workbook
+
 
 
 def read_the_credential_from_excel(file_path):
@@ -27,7 +21,7 @@ def read_the_credential_from_excel(file_path):
         credentials.append({"username": username, "password": password})
         return credentials
 
-@pytest.mark.parametrize("user_cred",read_the_credential_from_excel("C:\Users\HymavathiKothapalle\pythonProject\PythonWebAutomation\code\DDT_Testing\test_datadriventestng_TC2.py")
+@pytest.mark.parametrize("user_cred",read_the_credential_from_excel("/Users/HymavathiKothapalle/pythonProject/PythonWebAutomation/code/12_jandatadrivenClass/test_betterway_TC1.py"))
 def test_vwo_login_positive(user_cred):
     username = user_cred["username"]
     password = user_cred["password"]
@@ -49,7 +43,7 @@ def vwo_login(username,password):
     result=driver.current_url
     if result != "https://app.vwo.com/#dashboard":
         pytest.xfail("Invalid login")
-        driver.quit()
+    driver.quit()
 
     #write the logic if tstcase pass
     #-->URL changes TC
